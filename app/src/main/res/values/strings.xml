@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SkyCableWeb</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="aboutus">Sky Vision IT Solutions Started in 2010 in Nagpur, Sky Vision IT SOLUTIONS consists of a team with diverse backgrounds - User Interface designers, Graphic Designers, managers, planners, developers, software testers, marketing strategists and content developers. We provide offshore outsourcing solutions to enterprises worldwide. Combining proven expertise in technology, We delivers a range of outsourcing services that includes Custom Application Development, software Development, E-commerce Solutions , Security and Website Design, Develop and Maintenance, Graphic Design, Multimedia. We offer cutting- edge solutions that deliver competitive advantage to our valued clients. Our disciplined management techniques constantly develop ways to increase value for our clients. We offer a range of services with the objective of solving any query, requirements, problems and challenges that a client may face.</string>
+</resources>

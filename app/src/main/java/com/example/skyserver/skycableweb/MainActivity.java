@@ -124,15 +124,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             shh = new ServiceHandler();
-            String url = path + "Android/Agentlist";
+            String url = path + "Android/BillDetailsList";
             Log.d("Url: ", "> " + url);
 
             try{
                 List<NameValuePair> params2 = new ArrayList<>();
                 params2.add(new BasicNameValuePair("AgentName",agentnm));
-                params2.add(new BasicNameValuePair("CMonth",cmonth));
-                params2.add(new BasicNameValuePair("CYear",cyear));
-                params2.add(new BasicNameValuePair("CompanyId",spincompany));
+                params2.add(new BasicNameValuePair("Bmonth",cmonth));
+                params2.add(new BasicNameValuePair("Byear",cyear));
+//                params2.add(new BasicNameValuePair("CompanyId",spincompany));
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST , params2);
 
@@ -143,23 +143,23 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < classArray.length(); i++) {
                         JSONObject a1 = classArray.getJSONObject(i);
 
-                        id = a1.getString("CustomerID");
-                        custnm = a1.getString("CustomerName");
-                        setupbox = a1.getString("SetupBoxBill");
-                        billno = a1.getString("BillNo");
+                        id = a1.getString("CustId");
+                        custnm = a1.getString("CustName");
+                        setupbox = a1.getString("SetupBox_Details");
+                        billno = a1.getString("Bid");
                         area = a1.getString("Area");
-                        payableamt = a1.getString("PayableAmt");
-                        mob = a1.getString("Mbno1");
+                        payableamt = a1.getString("Monthcharge");
+                        mob = a1.getString("MobileNo");
                         //dtto = a1.getString("RegPassword");
-                        paid = a1.getString("PaidAmt");
+                        paid = a1.getString("PaymentAmount1");
                         bal = a1.getString("Balance");
-                        paydt = a1.getString("PayDate");
-                        adcust = a1.getString("AccNoBox");
-                        paydt1 = a1.getString("PayDate1");
-                        paidamt1 = a1.getString("PaidAmt1");
+                        paydt = a1.getString("PaymentDate1");
+//                        adcust = a1.getString("AccNoBox");
+                        paydt1 = a1.getString("PaymentDate2");
+                        paidamt1 = a1.getString("PaymentAmount2");
                        // montch = a1.getString("RegUsername");
 
-                        Product product = new Product(id,custnm,setupbox,billno,cmonth,payableamt,mob,paid,bal,paydt,adcust,paydt1,paidamt1,area,paystatus,cyear);
+                        Product product = new Product(id,custnm,setupbox,billno,cmonth,payableamt,mob,paid,bal,paydt,paydt1,paidamt1,area,paystatus,cyear);
                         mPlanetlist.add(product);
 
 

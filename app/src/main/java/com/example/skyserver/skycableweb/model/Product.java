@@ -17,7 +17,7 @@ public class Product {
     private String Bal;
   //  private String Regno;
     private String Paydate;
-    private String ADcust;
+//    private String ADcust;
     private String Paydate1;
     private String Paidamt1;
     private String Area;
@@ -25,7 +25,7 @@ public class Product {
     private String CYear;
   //  private String Monthch;
 
-    public Product(String id, String name, String setop, String bno, String month, String payableamt, String mobile,String paidamt, String bal, String paydate, String adcust, String paydate1, String paidamt1, String area, String payStatus, String cyear)
+    public Product(String id, String name, String setop, String bno, String month, String payableamt, String mobile,String paidamt, String bal, String paydate, String paydate1, String paidamt1, String area, String payStatus, String cyear)
 
     {
         this.Id = id;
@@ -41,7 +41,7 @@ public class Product {
         this.Bal = bal;
         //      this.Regno = regno;
         this.Paydate = paydate;
-        this.ADcust = adcust;
+//        this.ADcust = adcust;
         this.Paydate1 = paydate1;
         this.Paidamt1 = paidamt1;
         this.Area = area;
@@ -142,13 +142,13 @@ public class Product {
         this.Paydate = paydate;
     }
 
-    public String getADcust() {
-        return ADcust;
-    }
-
-    public void setADcust(String adcust) {
-        this.Paydate = adcust;
-    }
+//    public String getADcust() {
+//        return ADcust;
+//    }
+//
+//    public void setADcust(String adcust) {
+//        this.Paydate = adcust;
+//    }
 
 
     public String getPaydate1() {

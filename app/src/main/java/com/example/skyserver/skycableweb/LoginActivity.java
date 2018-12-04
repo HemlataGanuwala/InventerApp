@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
 
     EditText editTextuser,editTextpass;
     Button buttonlogin;
-    String path,user,pass,user1,pass1,cmonth,cyear,spincomp,spincompany;
+    String path,user,pass,user1,pass1,cmonth,cyear,spincomp,spincompany,Response;
     ServiceHandler shh;
     int flag=1;
     private DrawerLayout drawerLayout;
@@ -259,14 +259,14 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         @Override
         protected String doInBackground(Void... params) {
             shh = new ServiceHandler();
-            String url = path + "Android/Agentlogin";
+            String url = path + "Android/AgentLogin";
             Log.d("Url: ", "> " + url);
 
             try{
                 List<NameValuePair> params2 = new ArrayList<>();
                 params2.add(new BasicNameValuePair("AgentName",user));
                 params2.add(new BasicNameValuePair("Password",pass));
-                params2.add(new BasicNameValuePair("CompanyId",spincomp));
+//                params2.add(new BasicNameValuePair("CompanyId",spincomp));
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST , params2);
 
@@ -274,32 +274,42 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                     JSONObject c1 = new JSONObject(jsonStr);
                     JSONArray classArray = c1.getJSONArray("Response");
                     //JSONArray jsonarry = new JSONArray(jsonStr);
-                    for (int i = 0; i < classArray.length(); i++) {
-                        JSONObject a1 = classArray.getJSONObject(i);
-                        user1 = a1.getString("AgentName");
-                        pass1 = a1.getString("Password");
-                    }
-                    if(classArray.length() == 0)
+                    Response = (c1.getString("Response"));
+                    if (Response != null)
                     {
-                        flag = 0;
-                    }
-                    else
-                    {
-                        flag = 1;
-                        if (mcheck.isChecked())
+                        for (int i = 0; i < classArray.length(); i++) {
+                            JSONObject a1 = classArray.getJSONObject(i);
+                            user1 = a1.getString("AgentName");
+                            pass1 = a1.getString("Password");
+                        }
+                        if(classArray.length() == 0)
                         {
-                            Boolean boolIscheck = mcheck.isChecked();
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("pref_name",editTextuser.getText().toString());
-                            editor.putString("pref_pass",editTextpass.getText().toString());
-                            editor.putBoolean("pref_check",boolIscheck);
-                            editor.apply();
+                            flag = 0;
                         }
                         else
                         {
-                            preferences.edit().clear().apply();
+                            flag = 1;
+                            if (mcheck.isChecked())
+                            {
+                                Boolean boolIscheck = mcheck.isChecked();
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("pref_name",editTextuser.getText().toString());
+                                editor.putString("pref_pass",editTextpass.getText().toString());
+                                editor.putBoolean("pref_check",boolIscheck);
+                                editor.apply();
+                            }
+                            else
+                            {
+                                preferences.edit().clear().apply();
+                            }
                         }
                     }
+
+                    else
+                    {
+                        Toast.makeText(getBaseContext(), "Invalid AgentName Or Password", Toast.LENGTH_LONG).show();
+                    }
+
 
                 }
                 else

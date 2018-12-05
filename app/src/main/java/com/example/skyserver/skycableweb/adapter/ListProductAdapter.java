@@ -64,7 +64,7 @@ public class ListProductAdapter extends ArrayAdapter<Product> implements Filtera
             TextView tvMobile = (TextView) v.findViewById(R.id.tvmobile1);
             TextView tvSetop = (TextView) v.findViewById(R.id.tvsetop1);
             TextView tvpbal = (TextView) v.findViewById(R.id.tvprebal);
-            TextView tvactdact = (TextView) v.findViewById(R.id.tvadc);
+//            TextView tvactdact = (TextView) v.findViewById(R.id.tvadc);
             TextView tvbiln = (TextView) v.findViewById(R.id.tvbillno1);
             TextView tvarea = (TextView) v.findViewById(R.id.tvarealist);
             TextView tvregno = (TextView) v.findViewById(R.id.tvregno);
@@ -73,7 +73,7 @@ public class ListProductAdapter extends ArrayAdapter<Product> implements Filtera
             holder.mobile = tvMobile;
             holder.setup = tvSetop;
             holder.pbal = tvpbal;
-            holder.actdact = tvactdact;
+//            holder.actdact = tvactdact;
             holder.billno = tvbiln;
             holder.area = tvarea;
             holder.regno = tvregno;
@@ -95,18 +95,18 @@ public class ListProductAdapter extends ArrayAdapter<Product> implements Filtera
         holder.mobile.setText("" + planet.getMobile());
         holder.setup.setText("" + planet.getSetop());
         holder.pbal.setText("" + planet.getPayableamt());
-        holder.actdact.setText("" + planet.getADcust());
+//        holder.actdact.setText("" + planet.getADcust());
         holder.billno.setText("" + planet.getBno());
         holder.area.setText("" + planet.getArea());
         holder.regno.setText("" + planet.getId());
 
-        if (planet.getADcust().toString().equals("0.0")) {
-            holder.actdact.setText("Deactive");
-            holder.actdact.setTextColor(Color.RED);
-        } else {
-            holder.actdact.setText("Active");
-            holder.actdact.setTextColor(Color.parseColor("#ff669900"));
-        }
+//        if (planet.getADcust().toString().equals("0.0")) {
+//            holder.actdact.setText("Deactive");
+//            holder.actdact.setTextColor(Color.RED);
+//        } else {
+//            holder.actdact.setText("Active");
+//            holder.actdact.setTextColor(Color.parseColor("#ff669900"));
+//        }
 
         return v;
     }

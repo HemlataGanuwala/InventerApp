@@ -88,8 +88,8 @@ public class CustListActivity extends AppCompatActivity {
                 // Making a request to url and getting response
                 //smonth = "MAY";
                 List<NameValuePair> params2 = new ArrayList<>();
-                params2.add(new BasicNameValuePair("CustomerID", custid));
-                params2.add(new BasicNameValuePair("CompanyId", compid));
+                params2.add(new BasicNameValuePair("CustId", custid));
+              //  params2.add(new BasicNameValuePair("CompanyId", compid));
 
 //                Log.d(cmonth, "here is");
 
@@ -103,14 +103,14 @@ public class CustListActivity extends AppCompatActivity {
                     for (int i = 0; i < classArray.length(); i++)
                     {
                         JSONObject a1 = classArray.getJSONObject(i);
-                        cid = a1.getInt("CustomerID");
-                        bno = a1.getString("BillNo");
-                        cmonth = a1.getString("CMonth");
-                        pay1 = a1.getString("PaidAmt");
-                        pay2 = a1.getString("PaidAmt1");
-                        bal = a1.getString("Balance");
-                        paydt1 = a1.getString("PayDate");
-                        paydt2 = a1.getString("PayDate1");
+                        cid = a1.getInt("CustId");
+                        bno = a1.getString("Bid");
+                        cmonth = a1.getString("Bmonth");
+                        pay1 = a1.getString("PaymentAmount1");
+                        pay2 = a1.getString("PaymentAmount2");
+                        bal = a1.getString("OldBal");
+                        paydt1 = a1.getString("PaymentDate1");
+                        paydt2 = a1.getString("PaymentDate2");
 
                         Product1 product = new Product1(bno,cmonth,pay1,pay2,paydt1,paydt2,bal);
                         mProductList.add(product);

@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             shh = new ServiceHandler();
-            String url = path + "Android/BillDetailsList";
+            String url = path + "Registration/BillDetailsList";
             Log.d("Url: ", "> " + url);
 
             try{
@@ -164,8 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
 
                     }
-
-
                 }
                 else
                 {

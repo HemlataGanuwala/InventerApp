@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dashb"
+    android:background="@drawable/pencildrawnblue"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".SplashActivity">
@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight=".70"
+            android:baselineAligned="false"
             android:orientation="vertical">
 
             <LinearLayout
@@ -89,7 +90,7 @@
                     android:layout_weight="1"
                     android:gravity="top|center"
                     android:text="SKYVISION IT SOLUTIONS"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorchange"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>

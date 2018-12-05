@@ -182,15 +182,15 @@ public class DateListActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             shh = new ServiceHandler();
-            String url = path + "Android/Datewiselist";
+            String url = path + "Registration/Datewiselist";
             Log.d("Url: ", "> " + url);
 
             try{
                 List<NameValuePair> params2 = new ArrayList<>();
-                params2.add(new BasicNameValuePair("PayDate",paydate));
-                params2.add(new BasicNameValuePair("PayDate1",paydate));
-                params2.add(new BasicNameValuePair("CMonth",cmonth));
-                params2.add(new BasicNameValuePair("CYear",cyear));
+                params2.add(new BasicNameValuePair("PaymentDate1",paydate));
+                params2.add(new BasicNameValuePair("PaymentDate2",paydate));
+                params2.add(new BasicNameValuePair("Bmonth",cmonth));
+                params2.add(new BasicNameValuePair("Byear",cyear));
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST , params2);
 
@@ -201,14 +201,14 @@ public class DateListActivity extends AppCompatActivity {
                     for (int i = 0; i < classArray.length(); i++) {
                         JSONObject a1 = classArray.getJSONObject(i);
 
-                        custnm = a1.getString("CustomerName");
-                        setupbox = a1.getString("SetupBoxBill");
-                        billno = a1.getString("BillNo");
-                        payableamt = a1.getString("Balance");
-                        paid = a1.getString("PaidAmt");
-                        paydt = a1.getString("PayDate");
-                        paydt1 = a1.getString("PayDate1");
-                        paidamt1 = a1.getString("PaidAmt1");
+                        custnm = a1.getString("CustName");
+                        setupbox = a1.getString("SetupBox_Details");
+                        billno = a1.getString("Bid");
+                        payableamt = a1.getString("OldBal");
+                        paid = a1.getString("PaymentAmount1");
+                        paydt = a1.getString("PaymentDate1");
+                        paydt1 = a1.getString("PaymentDate2");
+                        paidamt1 = a1.getString("PaymentAmount2");
                         // montch = a1.getString("RegUsername");
 
                         DatewiseProduct product = new DatewiseProduct(custnm,setupbox,billno,paid,paydt);

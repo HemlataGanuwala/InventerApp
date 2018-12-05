@@ -389,7 +389,7 @@ public class AgentPayActivity extends AppCompatActivity {
             shh = new ServiceHandler();
 
             //String url = "http://sanjurokde.skyvisioncables.com/Complaint/SetComplaintand";
-            String url = path + "Android/PaidUpdate";
+            String url = path + "Registration/PaidBill";
 
             Log.d("Url: ", "> " + url);
 
@@ -398,12 +398,12 @@ public class AgentPayActivity extends AppCompatActivity {
 
                 List<NameValuePair> para = new ArrayList<>();
                // para.add(new BasicNameValuePair("CustBal", balance));
-                para.add(new BasicNameValuePair("PaidAmt", paidamt1));
-                para.add(new BasicNameValuePair("PaidAmt1", paidamt2));
-                para.add(new BasicNameValuePair("PayDate", dtr1));
-                para.add(new BasicNameValuePair("PayDate1", dtr2));
+                para.add(new BasicNameValuePair("PaymentAmount1", paidamt1));
+                para.add(new BasicNameValuePair("PaymentAmount2", paidamt2));
+                para.add(new BasicNameValuePair("PaymentDate1", dtr1));
+                para.add(new BasicNameValuePair("PaymentDate2", dtr2));
                 para.add(new BasicNameValuePair("Balance", balance));
-                para.add(new BasicNameValuePair("BillNo", bno));
+                para.add(new BasicNameValuePair("Bid", bno));
                 if (paidamt1.toString().equals("0")) {
                 }
                 else
@@ -455,13 +455,13 @@ public class AgentPayActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
             //progressBar.setVisibility(View.INVISIBLE);
-            new GetPaidRegData().execute();
+//            new GetPaidRegData().execute();
 
 
         }
     }
 
-    public class GetPaidRegData extends AsyncTask<String, String, String> {
+  /*  public class GetPaidRegData extends AsyncTask<String, String, String> {
 
         @Override
         protected void onPreExecute()
@@ -518,7 +518,7 @@ public class AgentPayActivity extends AppCompatActivity {
 
 
         }
-    }
+    }*/
 
     public void UpdateMobileSetupData()
     {
@@ -555,9 +555,9 @@ public class AgentPayActivity extends AppCompatActivity {
                 // Making a request to url and getting response
 
                 List<NameValuePair> para = new ArrayList<>();
-                para.add(new BasicNameValuePair("Mbno1", mobileno));
-                para.add(new BasicNameValuePair("SetupNoReg", setupboxno));
-                para.add(new BasicNameValuePair("CustomerID", custid));
+                para.add(new BasicNameValuePair("MobileNo", mobileno));
+                para.add(new BasicNameValuePair("SetupBox_Details", setupboxno));
+                para.add(new BasicNameValuePair("CustId", custid));
 
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST, para);

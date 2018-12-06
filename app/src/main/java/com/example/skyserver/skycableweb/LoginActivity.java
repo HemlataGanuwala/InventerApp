@@ -259,7 +259,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         @Override
         protected String doInBackground(Void... params) {
             shh = new ServiceHandler();
-            String url = path + "Android/AgentLogin";
+            String url = path + "Registration/AgentLogin";
             Log.d("Url: ", "> " + url);
 
             try{

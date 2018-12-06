@@ -455,70 +455,70 @@ public class AgentPayActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
             //progressBar.setVisibility(View.INVISIBLE);
-            new GetPaidRegData().execute();
+//            new GetPaidRegData().execute();
 
 
         }
     }
 
-    public class GetPaidRegData extends AsyncTask<String, String, String> {
-
-        @Override
-        protected void onPreExecute()
-        {
-            // TODO Auto-generated method stub
-            super.onPreExecute();
-
-            //progressBar.setVisibility(View.VISIBLE);
-            //GPlusProgressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            // TODO Auto-generated method stub
-
-            shh = new ServiceHandler();
-
-            //String url = "http://sanjurokde.skyvisioncables.com/Complaint/SetComplaintand";
-            String url = path + "Android/PaidRegUpdate";
-
-            Log.d("Url: ", "> " + url);
-
-            try {
-                // Making a request to url and getting response
-
-                List<NameValuePair> para = new ArrayList<>();
-                 para.add(new BasicNameValuePair("CustBal", balance));
-                para.add(new BasicNameValuePair("CustomerID", custid));
-
-
-                String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST, para);
-                if (jsonStr != null) {
-                    JSONObject jObj = new JSONObject(jsonStr);
-                    String msg = jObj.getString("Message");
-                    Status = Integer.parseInt(jObj.getString("Status"));
-
-                } else {
-                    Toast.makeText(AgentPayActivity.this, "Data not Found", Toast.LENGTH_LONG).show();
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.e("ServiceHandler", "Json Error ");
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            // TODO Auto-generated method stub
-            super.onPostExecute(result);
-            //progressBar.setVisibility(View.INVISIBLE);
-
-
-        }
-    }
+//    public class GetPaidRegData extends AsyncTask<String, String, String> {
+//
+//        @Override
+//        protected void onPreExecute()
+//        {
+//            // TODO Auto-generated method stub
+//            super.onPreExecute();
+//
+//            //progressBar.setVisibility(View.VISIBLE);
+//            //GPlusProgressBar.setVisibility(View.VISIBLE);
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            // TODO Auto-generated method stub
+//
+//            shh = new ServiceHandler();
+//
+//            //String url = "http://sanjurokde.skyvisioncables.com/Complaint/SetComplaintand";
+//            String url = path + "Android/PaidRegUpdate";
+//
+//            Log.d("Url: ", "> " + url);
+//
+//            try {
+//                // Making a request to url and getting response
+//
+//                List<NameValuePair> para = new ArrayList<>();
+//                 para.add(new BasicNameValuePair("CustBal", balance));
+//                para.add(new BasicNameValuePair("CustomerID", custid));
+//
+//
+//                String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST, para);
+//                if (jsonStr != null) {
+//                    JSONObject jObj = new JSONObject(jsonStr);
+//                    String msg = jObj.getString("Message");
+//                    Status = Integer.parseInt(jObj.getString("Status"));
+//
+//                } else {
+//                    Toast.makeText(AgentPayActivity.this, "Data not Found", Toast.LENGTH_LONG).show();
+//                }
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                Log.e("ServiceHandler", "Json Error ");
+//            }
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            // TODO Auto-generated method stub
+//            super.onPostExecute(result);
+//            //progressBar.setVisibility(View.INVISIBLE);
+//
+//
+//        }
+//    }
 
     public void UpdateMobileSetupData()
     {
@@ -547,7 +547,7 @@ public class AgentPayActivity extends AppCompatActivity {
             shh = new ServiceHandler();
 
             //String url = "http://sanjurokde.skyvisioncables.com/Complaint/SetComplaintand";
-            String url = path + "Android/PaidMobileSetUpdate";
+            String url = path + "Registration/Mobileupdate";
 
             Log.d("Url: ", "> " + url);
 
@@ -555,9 +555,9 @@ public class AgentPayActivity extends AppCompatActivity {
                 // Making a request to url and getting response
 
                 List<NameValuePair> para = new ArrayList<>();
-                para.add(new BasicNameValuePair("Mbno1", mobileno));
-                para.add(new BasicNameValuePair("SetupNoReg", setupboxno));
-                para.add(new BasicNameValuePair("CustomerID", custid));
+                para.add(new BasicNameValuePair("MobileNo", mobileno));
+//                para.add(new BasicNameValuePair("SetupNoReg", setupboxno));
+                para.add(new BasicNameValuePair("CustId", custid));
 
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST, para);

@@ -64,7 +64,7 @@ public class ListProductAdapter extends ArrayAdapter<Product> implements Filtera
             TextView tvMobile = (TextView) v.findViewById(R.id.tvmobile1);
             TextView tvSetop = (TextView) v.findViewById(R.id.tvsetop1);
             TextView tvpbal = (TextView) v.findViewById(R.id.tvprebal);
-            TextView tvactdact = (TextView) v.findViewById(R.id.tvadc);
+//            TextView tvactdact = (TextView) v.findViewById(R.id.tvadc);
             TextView tvbiln = (TextView) v.findViewById(R.id.tvbillno1);
             TextView tvarea = (TextView) v.findViewById(R.id.tvarealist);
             TextView tvregno = (TextView) v.findViewById(R.id.tvregno);

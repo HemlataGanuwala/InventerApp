@@ -253,7 +253,7 @@ public class AgentPayActivity extends AppCompatActivity {
         {
             shh = new ServiceHandler();
 
-            String url =  path + "Android/Billnolist";
+            String url =  path + "Registration/BillNoDetails";
 
             Log.d("Url: ", "> " + url);
 
@@ -261,7 +261,7 @@ public class AgentPayActivity extends AppCompatActivity {
                 // Making a request to url and getting response
                 //smonth = "MAY";
                 List<NameValuePair> params2 = new ArrayList<>();
-                params2.add(new BasicNameValuePair("BillNo", bno));
+                params2.add(new BasicNameValuePair("Bid", bno));
 
 //                Log.d(cmonth, "here is");
 
@@ -276,19 +276,19 @@ public class AgentPayActivity extends AppCompatActivity {
                     {
                         JSONObject a1 = classArray.getJSONObject(i);
 
-                        custid = a1.getString("CustomerID");
-                        custname = a1.getString("CustomerName");
-                        setup = a1.getString("SetupBoxBill");
-                        bno = a1.getString("BillNo");
-                        cmonth = a1.getString("CMonth");
-                        payableamt = a1.getString("PayableAmt");
-                        mobile = a1.getString("Mbno1");
-                        pay1 = a1.getInt("PaidAmt");
-                        pay2 = a1.getInt("PaidAmt1");
+                        custid = a1.getString("CustId");
+                        custname = a1.getString("CustName");
+                        setup = a1.getString("SetupBox_Details");
+                        bno = a1.getString("Bid");
+                        cmonth = a1.getString("Bmonth");
+                        payableamt = a1.getString("Monthcharge");
+                        mobile = a1.getString("MobileNo");
+                        pay1 = a1.getInt("PaymentAmount1");
+                        pay2 = a1.getInt("PaymentAmount2");
                         bal = a1.getString("Balance");
-                        settime = a1.getString("PayTime");
-                        settime1 = a1.getString("PayTime1");
-                        companyid = a1.getString("CompanyId");
+//                        settime = a1.getString("PayTime");
+//                        settime1 = a1.getString("PayTime1");
+//                        companyid = a1.getString("CompanyId");
                     }
 
                 } else {
@@ -389,7 +389,7 @@ public class AgentPayActivity extends AppCompatActivity {
             shh = new ServiceHandler();
 
             //String url = "http://sanjurokde.skyvisioncables.com/Complaint/SetComplaintand";
-            String url = path + "Android/PaidUpdate";
+            String url = path + "Registration/PaidBill";
 
             Log.d("Url: ", "> " + url);
 
@@ -398,24 +398,24 @@ public class AgentPayActivity extends AppCompatActivity {
 
                 List<NameValuePair> para = new ArrayList<>();
                // para.add(new BasicNameValuePair("CustBal", balance));
-                para.add(new BasicNameValuePair("PaidAmt", paidamt1));
-                para.add(new BasicNameValuePair("PaidAmt1", paidamt2));
-                para.add(new BasicNameValuePair("PayDate", dtr1));
-                para.add(new BasicNameValuePair("PayDate1", dtr2));
+                para.add(new BasicNameValuePair("PaymentAmount1", paidamt1));
+                para.add(new BasicNameValuePair("PaymentAmount2", paidamt2));
+                para.add(new BasicNameValuePair("PaymentDate1", dtr1));
+                para.add(new BasicNameValuePair("PaymentDate2", dtr2));
                 para.add(new BasicNameValuePair("Balance", balance));
-                para.add(new BasicNameValuePair("BillNo", bno));
-                if (paidamt1.toString().equals("0")) {
-                }
-                else
-                {
-                    para.add(new BasicNameValuePair("PayTime", settime));
-                }
-                if (paidamt2.toString().equals("0")) {
-                }
-                else
-                {
-                    para.add(new BasicNameValuePair("PayTime1", settime1));
-                }
+                para.add(new BasicNameValuePair("Bid", bno));
+//                if (paidamt1.toString().equals("0")) {
+//                }
+//                else
+//                {
+//                    para.add(new BasicNameValuePair("PayTime", settime));
+//                }
+//                if (paidamt2.toString().equals("0")) {
+//                }
+//                else
+//                {
+//                    para.add(new BasicNameValuePair("PayTime1", settime1));
+//                }
 
                 //Log.d(senrollNo, "here is");
 

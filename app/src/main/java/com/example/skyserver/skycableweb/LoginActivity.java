@@ -158,6 +158,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         switch (item.getItemId()) {
             case R.id.listdate:
                 Intent intent = new Intent(LoginActivity.this,DateListActivity.class);
+                intent.putExtra("a1",user);
                 startActivity(intent);
 
                 return true;

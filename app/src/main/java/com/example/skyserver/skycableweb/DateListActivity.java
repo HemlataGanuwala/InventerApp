@@ -2,6 +2,7 @@ package com.example.skyserver.skycableweb;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -58,6 +59,7 @@ public class DateListActivity extends AppCompatActivity {
         buttonshow =findViewById(R.id.btnshow);
         listView = findViewById(R.id.lvdatewiselist);
         Submitdata();
+        Display();
 
         textViewdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +168,16 @@ public class DateListActivity extends AppCompatActivity {
 
     }
 
+    public void Display()
+    {
+        Intent inn= getIntent();
+        Bundle bg1 = inn.getExtras();
+        if(bg1!=null) {
+            agentnm = (String) bg1.get("a1");
+        }
+
+    }
+
     class getDatewiselistData extends AsyncTask<Void, Void, String>
     {
         @Override
@@ -182,7 +194,7 @@ public class DateListActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             shh = new ServiceHandler();
-            String url = path + "Registration/Datewiselist";
+            String url = path + "Registration/DailyCollectionReportAgent";
             Log.d("Url: ", "> " + url);
 
             try{
@@ -191,6 +203,7 @@ public class DateListActivity extends AppCompatActivity {
                 params2.add(new BasicNameValuePair("PaymentDate2",paydate));
                 params2.add(new BasicNameValuePair("Bmonth",cmonth));
                 params2.add(new BasicNameValuePair("Byear",cyear));
+                params2.add(new BasicNameValuePair("AgentName",agentnm));
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST , params2);
 

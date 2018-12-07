@@ -16,7 +16,7 @@ public class SplashActivity extends AppCompatActivity {
 
         final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
         globalVariable.setconstr("http://192.168.0.112:8011/api/");
-       // globalVariable.setconstr("http://omi.skyvisioncables.com/api/");
+//        globalVariable.setconstr("http://omi.skyvisioncables.com/api/");
 
         new Handler().postDelayed(new Runnable() {
             @Override

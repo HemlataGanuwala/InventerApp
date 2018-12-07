@@ -139,9 +139,10 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/white"
         app:headerLayout="@layout/navi_layout"
         app:itemIconTint="@color/colorchange"
         app:itemTextColor="@color/colorchange"

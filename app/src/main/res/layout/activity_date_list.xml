@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_weight="1"
+            android:layout_weight=".96"
             android:orientation="horizontal">
 
             <TextView
@@ -37,8 +37,9 @@
                 android:id="@+id/btnshow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/p"
+                android:background="@drawable/bg_button"
                 android:src="@android:drawable/editbox_background"
                 android:text="Show"
                 android:textColor="@android:color/white" />
@@ -47,6 +48,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
@@ -58,7 +60,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Customer Name"
-                android:textColor="@android:color/holo_orange_dark"
+                android:textColor="@color/colorchange"
                 android:textSize="18sp" />
 
             <TextView
@@ -68,7 +70,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Bill No."
-                android:textColor="@android:color/holo_orange_dark"
+                android:textColor="@color/colorchange"
                 android:textSize="18sp" />
 
             <TextView
@@ -78,7 +80,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Paid Amt"
-                android:textColor="@android:color/holo_orange_dark"
+                android:textColor="@color/colorchange"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -86,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="5dp"
-            android:layout_weight=".25"
+            android:layout_weight=".30"
             android:orientation="vertical">
 
             <ListView
@@ -116,7 +118,7 @@
                     android:background="@android:drawable/editbox_background"
                     android:gravity="center"
                     android:hint="Total Cust"
-                    android:textColor="@android:color/holo_red_light"
+                    android:textColor="@color/colorchange"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -125,11 +127,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="80dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@android:drawable/editbox_background"
                     android:gravity="center"
                     android:hint="Total Amt"
-                    android:textColor="@android:color/holo_red_light"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>

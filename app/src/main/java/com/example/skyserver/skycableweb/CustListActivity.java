@@ -29,7 +29,7 @@ public class CustListActivity extends AppCompatActivity {
     TextView textViewcustid,textViewcustnm,textViewcustsetup,textViewcustmobile,textViewcustbillno,textViewcustpaydt,textViewcustpaid,textViewcustbal;
     String custid,custnm,setupbox,mob;
     ServiceHandler shh;
-    String path,cmonth,pay1,pay2,paydt1,paydt2,bno,bal,compid;
+    String path,cmonth,pay1,pay2,paydt1,paydt2,bno,bal,compid,agentnm;
     int cid;
 
     @Override
@@ -58,7 +58,8 @@ public class CustListActivity extends AppCompatActivity {
             custnm = (String) bundle.get("a2");
             setupbox = (String) bundle.get("a3");
             mob = (String) bundle.get("a4");
-            compid = (String) bundle.get("a5");
+            agentnm = (String) bundle.get("a5");
+//            compid = (String) bundle.get("a5");
 
             textViewcustnm.setText(custnm);
             textViewcustsetup.setText(setupbox);
@@ -80,7 +81,7 @@ public class CustListActivity extends AppCompatActivity {
         {
             shh = new ServiceHandler();
 
-            String url =  path + "Android/CustPaidlist";
+            String url =  path + "Registration/PaidDetailsList";
 
             Log.d("Url: ", "> " + url);
 
@@ -89,7 +90,8 @@ public class CustListActivity extends AppCompatActivity {
                 //smonth = "MAY";
                 List<NameValuePair> params2 = new ArrayList<>();
                 params2.add(new BasicNameValuePair("CustId", custid));
-              //  params2.add(new BasicNameValuePair("CompanyId", compid));
+                params2.add(new BasicNameValuePair("AgentName", agentnm));
+//                params2.add(new BasicNameValuePair("CompanyId", compid));
 
 //                Log.d(cmonth, "here is");
 

@@ -41,12 +41,12 @@ public class AgentPayActivity extends AppCompatActivity {
     double prebal;
     private List<Product> mProductList;
     ServiceHandler shh;
-    String path, custid, custname, setup, bno, cmonth, payableamt, mobile, dtto, monthch;
+    String path, custid, custname, setup, bno, cmonth, payableamt, mobile,agentnm;
     int Status,pay1, pay2;
     String pamt, paidamt1, paidamt2, paydt1, paydt2, balance, bal;
     String dtr1;
     String dtr2;
-    String msgs,mobileno,setupboxno,settime,settime1,companyid;
+    String msgs,mobileno,setupboxno,settime,settime1,companyid,Message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,7 +216,8 @@ public class AgentPayActivity extends AppCompatActivity {
                 intent.putExtra("a2",custname);
                 intent.putExtra("a3",setup);
                 intent.putExtra("a4",mobile);
-                intent.putExtra("a5",companyid);
+                intent.putExtra("a5",agentnm);
+//                intent.putExtra("a5",companyid);
                 startActivity(intent);
             }
         });
@@ -286,6 +287,7 @@ public class AgentPayActivity extends AppCompatActivity {
                         pay1 = a1.getInt("PaymentAmount1");
                         pay2 = a1.getInt("PaymentAmount2");
                         bal = a1.getString("Balance");
+                        agentnm = a1.getString("AgentName");
 //                        settime = a1.getString("PayTime");
 //                        settime1 = a1.getString("PayTime1");
 //                        companyid = a1.getString("CompanyId");
@@ -424,6 +426,7 @@ public class AgentPayActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(jsonStr);
                     String msg = jObj.getString("Message");
                     Status = Integer.parseInt(jObj.getString("Status"));
+                    Message = jObj.getString("Message");
 
                     if (Status == 1)
                     {
@@ -457,6 +460,10 @@ public class AgentPayActivity extends AppCompatActivity {
             //progressBar.setVisibility(View.INVISIBLE);
 //            new GetPaidRegData().execute();
 
+            if(Status == 2)
+            {
+                Toast.makeText(AgentPayActivity.this, "" + Message, Toast.LENGTH_LONG).show();
+            }
 
         }
     }

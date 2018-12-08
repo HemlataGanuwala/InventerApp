@@ -4,7 +4,7 @@
     android:id="@+id/framelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DatewiseFragment">
+    tools:context=".DateListActivity">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -12,6 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/curve"
         android:orientation="vertical">
 
         <LinearLayout
@@ -19,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_weight=".96"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -30,7 +31,7 @@
                 android:background="@android:drawable/editbox_background"
                 android:gravity="center"
                 android:text="Select Date"
-                android:textColor="?attr/actionModeSplitBackground"
+                android:textColor="@color/gray"
                 android:textSize="20sp" />
 
             <Button
@@ -39,17 +40,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_button"
+                android:background="@drawable/buttonwhite"
                 android:src="@android:drawable/editbox_background"
                 android:text="Show"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="1"
+            android:background="@color/white"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -60,7 +65,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Customer Name"
-                android:textColor="@color/colorchange"
+                android:textColor="@color/gray"
                 android:textSize="18sp" />
 
             <TextView
@@ -70,7 +75,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Bill No."
-                android:textColor="@color/colorchange"
+                android:textColor="@color/gray"
                 android:textSize="18sp" />
 
             <TextView
@@ -80,7 +85,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Paid Amt"
-                android:textColor="@color/colorchange"
+                android:textColor="@color/gray"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -94,7 +99,10 @@
             <ListView
                 android:id="@+id/lvdatewiselist"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -119,7 +127,8 @@
                     android:gravity="center"
                     android:hint="Total Cust"
                     android:textColor="@color/colorchange"
-                    android:textSize="18sp"
+                    android:textColorHint="@color/gray"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -132,8 +141,9 @@
                     android:background="@android:drawable/editbox_background"
                     android:gravity="center"
                     android:hint="Total Amt"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
+                    android:textColor="@color/colorchange"
+                    android:textColorHint="@color/gray"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

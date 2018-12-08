@@ -217,7 +217,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Month"
-                        android:textColor="@android:color/holo_orange_dark"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -243,7 +243,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center"
                         android:text="Bill No."
-                        android:textColor="@android:color/holo_orange_dark"
+                        android:textColor="@color/colorchange"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -285,7 +285,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center"
                         android:text="Bill Date"
-                        android:textColor="@android:color/holo_orange_dark"
+                        android:textColor="@color/colorchange"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -327,7 +327,7 @@
                         android:layout_weight="1.30"
                         android:gravity="left|center"
                         android:text="Pre. Bal."
-                        android:textColor="@android:color/holo_orange_dark"
+                        android:textColor="@color/colorchange"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -367,7 +367,7 @@
                         android:layout_height="match_parent"
                         android:gravity="left|center"
                         android:text="Paid Amt1"
-                        android:textColor="@android:color/holo_orange_dark"
+                        android:textColor="@color/colorchange"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -460,7 +460,7 @@
                         android:layout_height="match_parent"
                         android:gravity="left|center"
                         android:text="Paid Amt2"
-                        android:textColor="@android:color/holo_orange_dark"
+                        android:textColor="@color/colorchange"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -510,7 +510,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center"
                         android:text="Bal Amt"
-                        android:textColor="@android:color/holo_orange_dark"
+                        android:textColor="@color/colorchange"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -553,9 +553,11 @@
 
                 <Button
                     android:id="@+id/btnpay"
-                    android:layout_width="125dp"
+                    android:layout_width="145dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/p"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg_button"
                     android:text="Pay"
                     android:textColor="?attr/colorButtonNormal"
                     android:textStyle="bold" />
@@ -564,7 +566,9 @@
                     android:id="@+id/btncall"
                     android:layout_width="145dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/p"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_button"
                     android:text="PayDetails"
                     android:textColor="?attr/colorButtonNormal"
                     android:textStyle="bold" />

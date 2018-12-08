@@ -72,14 +72,14 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        spinner = (Spinner) findViewById(R.id.spincompany);
-        List<String> list = new ArrayList<String>();
-        list.add("1");
-        list.add("2");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
+       // spinner = (Spinner) findViewById(R.id.spincompany);
+//        List<String> list = new ArrayList<String>();
+//        list.add("1");
+//        list.add("2");
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_item, list);
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(dataAdapter);
 
         editTextuser = (EditText)findViewById(R.id.etuser);
         editTextpass = (EditText)findViewById(R.id.etpass);

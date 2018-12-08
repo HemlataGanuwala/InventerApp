@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_dark"
+                android:background="@color/colorchange"
                 android:orientation="horizontal">
 
 
@@ -33,6 +33,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:text="SEARCH"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
 
                 <EditText
@@ -82,6 +83,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="550dp"
+                android:background="@drawable/curve"
                 android:orientation="vertical">
                 //android:layout_height="350dp"
 
@@ -90,8 +92,10 @@
                     android:id="@+id/listview_product"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/dashb"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/white"
                     android:divider="#000000"
                     android:dividerHeight="5dp">
 

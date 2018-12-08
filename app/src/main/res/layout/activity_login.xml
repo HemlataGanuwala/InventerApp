@@ -2,123 +2,152 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dashb"
+    android:background="@drawable/background_cable1"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".LoginActivity"
-    android:id="@+id/drawer_layout"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="end">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
             android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorchange"
+            android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:elevation="4dp">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         </android.support.v7.widget.Toolbar>
 
         <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/fragment_container"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@drawable/bg_circle"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_weight="1">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="70dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:src="@drawable/logo1" />-->
+
+    <!--</LinearLayout>-->
+
+
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".30"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:layout_marginTop="30dp"
+        android:layout_weight=".50"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvagentid"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvuser"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible" />
+            android:layout_marginTop="150dp"
+            android:gravity="center"
+            android:text="Agent Name"
+            android:textColor="@color/colorchange"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etuser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
             android:layout_marginRight="20dp"
-            android:background="@android:drawable/editbox_background_normal"
-            android:ems="10"
-            android:gravity="center_vertical"
-            android:hint="AgentName"
-            android:inputType="textCapCharacters|textPersonName"
-            android:textAlignment="center"
-            tools:ignore="HardcodedText" />
+            android:gravity="center"
+            android:hint="Enter Agent Name"
+            android:textColor="@color/gray"
+            android:textColorHint="@color/gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Password"
+            android:textColor="@color/colorchange"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etpass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
             android:layout_marginRight="20dp"
-            android:background="@android:drawable/editbox_background_normal"
-            android:ems="10"
-            android:gravity="center_vertical"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textAlignment="center"
-            tools:ignore="HardcodedText" />
-
-        <Spinner
-            android:id="@+id/spincompany"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="140dp"
-            android:layout_marginRight="140dp"
-            android:textAlignment="center"
-            android:background="@android:drawable/editbox_background_normal"/>
+            android:gravity="center"
+            android:hint="Enter Password"
+            android:textColor="@color/gray"
+            android:textColorHint="@color/gray"
+            android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/chkrememberme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="20dp"
-            android:buttonTint="@color/colorPrimary"
-            android:text="Remember me"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="10dp"
+            android:text="REMEMBER ME"
+            android:textColor="@color/colorchange"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnlogin"
-            android:layout_width="143dp"
-            android:layout_height="38dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/p"
-            android:gravity="center_vertical"
-            android:text="Login"
-            android:textAlignment="center"
-            android:textColor="@android:color/holo_orange_dark" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_button"
+            android:text="LogIn"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
+
     <android.support.design.widget.NavigationView
-        android:layout_width="wrap_content"
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:id="@+id/nav_view"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/colorPrimary"
+        android:background="@color/white"
         app:headerLayout="@layout/navi_layout"
-        app:menu="@menu/drawer_menu"></android.support.design.widget.NavigationView>
+        app:itemIconTint="@color/colorchange"
+        app:itemTextColor="@color/colorchange"
+        app:menu="@menu/drawer_menu">
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

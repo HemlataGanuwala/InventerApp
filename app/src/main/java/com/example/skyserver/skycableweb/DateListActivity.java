@@ -35,7 +35,7 @@ public class DateListActivity extends AppCompatActivity {
     String paydate;
     TextView textViewdate,textViewtotcust,textViewtotamt;
     Button buttonshow;
-    String path,CDay,CMonth,cmonth,cyear;
+    String path,CDay,CMonth,cmonth,cyear,operatorno,pathIp;
     View view;
     int id,year,month,day;
     private DatePickerDialog dialog;
@@ -174,6 +174,8 @@ public class DateListActivity extends AppCompatActivity {
         Bundle bg1 = inn.getExtras();
         if(bg1!=null) {
             agentnm = (String) bg1.get("a1");
+            operatorno = (String) bg1.get("a2");
+            pathIp = (String) bg1.get("a3");
         }
 
     }
@@ -204,6 +206,7 @@ public class DateListActivity extends AppCompatActivity {
                 params2.add(new BasicNameValuePair("Bmonth",cmonth));
                 params2.add(new BasicNameValuePair("Byear",cyear));
                 params2.add(new BasicNameValuePair("AgentName",agentnm));
+                params2.add(new BasicNameValuePair("OperatorCode",operatorno));
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST , params2);
 

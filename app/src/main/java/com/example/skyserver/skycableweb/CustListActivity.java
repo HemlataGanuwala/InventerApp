@@ -27,7 +27,7 @@ public class CustListActivity extends AppCompatActivity {
     private PlanetCustlistAdapter adapter;
     private List<Product1> mProductList = new ArrayList<Product1>();
     TextView textViewcustid,textViewcustnm,textViewcustsetup,textViewcustmobile,textViewcustbillno,textViewcustpaydt,textViewcustpaid,textViewcustbal;
-    String custid,custnm,setupbox,mob;
+    String custid,custnm,setupbox,mob,operatorno,pathIp;
     ServiceHandler shh;
     String path,cmonth,pay1,pay2,paydt1,paydt2,bno,bal,compid,agentnm;
     int cid;
@@ -59,7 +59,8 @@ public class CustListActivity extends AppCompatActivity {
             setupbox = (String) bundle.get("a3");
             mob = (String) bundle.get("a4");
             agentnm = (String) bundle.get("a5");
-//            compid = (String) bundle.get("a5");
+            operatorno = (String) bundle.get("a6");
+            pathIp = (String) bundle.get("a7");
 
             textViewcustnm.setText(custnm);
             textViewcustsetup.setText(setupbox);
@@ -81,7 +82,7 @@ public class CustListActivity extends AppCompatActivity {
         {
             shh = new ServiceHandler();
 
-            String url =  path + "Registration/PaidDetailsList";
+            String url =  pathIp + "Registration/PaidDetailsList";
 
             Log.d("Url: ", "> " + url);
 
@@ -91,7 +92,7 @@ public class CustListActivity extends AppCompatActivity {
                 List<NameValuePair> params2 = new ArrayList<>();
                 params2.add(new BasicNameValuePair("CustId", custid));
                 params2.add(new BasicNameValuePair("AgentName", agentnm));
-//                params2.add(new BasicNameValuePair("CompanyId", compid));
+                params2.add(new BasicNameValuePair("OperatorCode", operatorno));
 
 //                Log.d(cmonth, "here is");
 

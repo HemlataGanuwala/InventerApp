@@ -43,7 +43,7 @@ public class AgentPayActivity extends AppCompatActivity {
     ServiceHandler shh;
     String path, custid, custname, setup, bno, cmonth, payableamt, mobile,agentnm;
     int Status,pay1, pay2;
-    String pamt, paidamt1, paidamt2, paydt1, paydt2, balance, bal;
+    String pamt, paidamt1, paidamt2, paydt1, paydt2, balance, bal,operatorno,pathIp;
     String dtr1;
     String dtr2;
     String msgs,mobileno,setupboxno,settime,settime1,companyid,Message;
@@ -84,7 +84,7 @@ public class AgentPayActivity extends AppCompatActivity {
         Display();
 
         Date d = new Date();
-        CharSequence g = DateFormat.format("dd/MM/yyyy", d.getTime());
+        CharSequence g = DateFormat.format("dd-MM-yyyy", d.getTime());
         textViewbilldt.setText(g);
 
 //        Date dt = new Date();
@@ -217,7 +217,8 @@ public class AgentPayActivity extends AppCompatActivity {
                 intent.putExtra("a3",setup);
                 intent.putExtra("a4",mobile);
                 intent.putExtra("a5",agentnm);
-//                intent.putExtra("a5",companyid);
+                intent.putExtra("a6",operatorno);
+                intent.putExtra("a7",pathIp);
                 startActivity(intent);
             }
         });
@@ -240,6 +241,8 @@ public class AgentPayActivity extends AppCompatActivity {
         Bundle bg1 = inn.getExtras();
         if(bg1!=null) {
             bno = (String) bg1.get("a4");
+            operatorno = (String) bg1.get("a5");
+            pathIp = (String) bg1.get("a6");
         }
     }
 
@@ -254,7 +257,7 @@ public class AgentPayActivity extends AppCompatActivity {
         {
             shh = new ServiceHandler();
 
-            String url =  path + "Registration/BillNoDetails";
+            String url =  pathIp + "Registration/BillNoDetails";
 
             Log.d("Url: ", "> " + url);
 
@@ -263,6 +266,7 @@ public class AgentPayActivity extends AppCompatActivity {
                 //smonth = "MAY";
                 List<NameValuePair> params2 = new ArrayList<>();
                 params2.add(new BasicNameValuePair("Bid", bno));
+                params2.add(new BasicNameValuePair("OperatorCode", operatorno));
 
 //                Log.d(cmonth, "here is");
 
@@ -369,29 +373,23 @@ public class AgentPayActivity extends AppCompatActivity {
 //        paydt2 = textViewbilldt1.getText().toString();
         balance = textViewbal.getText().toString();
 
-        new  GetPaidData().execute();
+        new GetPaidData().execute();
     }
 
     public class GetPaidData extends AsyncTask<String, String, String> {
 
         @Override
-        protected void onPreExecute()
-        {
-            // TODO Auto-generated method stub
+        protected void onPreExecute() {
             super.onPreExecute();
-
-            //progressBar.setVisibility(View.VISIBLE);
-            //GPlusProgressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            // TODO Auto-generated method stub
-
+        protected String doInBackground(String... strings) {
             shh = new ServiceHandler();
 
             //String url = "http://sanjurokde.skyvisioncables.com/Complaint/SetComplaintand";
-            String url = path + "Registration/PaidBill";
+            String url = pathIp + "Registration/PaidBill";
+//            String url = "http://localhost:60243/api/Report/PaidBillData";
 
             Log.d("Url: ", "> " + url);
 
@@ -399,13 +397,14 @@ public class AgentPayActivity extends AppCompatActivity {
                 // Making a request to url and getting response
 
                 List<NameValuePair> para = new ArrayList<>();
-               // para.add(new BasicNameValuePair("CustBal", balance));
+                // para.add(new BasicNameValuePair("CustBal", balance));
                 para.add(new BasicNameValuePair("PaymentAmount1", paidamt1));
                 para.add(new BasicNameValuePair("PaymentAmount2", paidamt2));
                 para.add(new BasicNameValuePair("PaymentDate1", dtr1));
                 para.add(new BasicNameValuePair("PaymentDate2", dtr2));
                 para.add(new BasicNameValuePair("Balance", balance));
                 para.add(new BasicNameValuePair("Bid", bno));
+                para.add(new BasicNameValuePair("OperatorCode", operatorno));
 //                if (paidamt1.toString().equals("0")) {
 //                }
 //                else
@@ -454,19 +453,16 @@ public class AgentPayActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            // TODO Auto-generated method stub
-            super.onPostExecute(result);
-            //progressBar.setVisibility(View.INVISIBLE);
-//            new GetPaidRegData().execute();
-
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
             if(Status == 2)
             {
                 Toast.makeText(AgentPayActivity.this, "" + Message, Toast.LENGTH_LONG).show();
             }
-
         }
     }
+
+
 
 //    public class GetPaidRegData extends AsyncTask<String, String, String> {
 //
@@ -554,7 +550,7 @@ public class AgentPayActivity extends AppCompatActivity {
             shh = new ServiceHandler();
 
             //String url = "http://sanjurokde.skyvisioncables.com/Complaint/SetComplaintand";
-            String url = path + "Registration/Mobileupdate";
+            String url = pathIp + "Registration/Mobileupdate";
 
             Log.d("Url: ", "> " + url);
 
@@ -565,6 +561,7 @@ public class AgentPayActivity extends AppCompatActivity {
                 para.add(new BasicNameValuePair("MobileNo", mobileno));
 //                para.add(new BasicNameValuePair("SetupNoReg", setupboxno));
                 para.add(new BasicNameValuePair("CustId", custid));
+                para.add(new BasicNameValuePair("OperatorCode", operatorno));
 
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST, para);

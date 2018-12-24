@@ -1,14 +1,19 @@
 package com.example.skyserver.skycableweb;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +23,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,17 +49,18 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    EditText editTextuser,editTextpass;
+    EditText editTextuser,editTextpass,editTextoperatorno;
     Button buttonlogin;
-    String path,user,pass,user1,pass1,cmonth,cyear,spincomp,spincompany,Response;
+    String path,user,pass,user1,pass1,cmonth,cyear,spincomp,spincompany,Response,imeino,operatorno,pathIp,updateimeino;
     ServiceHandler shh;
-    int flag=1;
+    int flag=1,Status = 1;
     private DrawerLayout drawerLayout;
     private ProgressDialog progress;
     private CheckBox mcheck;
     private SharedPreferences preferences;
     private static final String PREFS_NAME = "PrefsFile";
     Spinner spinner;
+    private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +90,11 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
 
         editTextuser = (EditText)findViewById(R.id.etuser);
         editTextpass = (EditText)findViewById(R.id.etpass);
+        editTextoperatorno = (EditText)findViewById(R.id.etoperatorno);
         buttonlogin = (Button) findViewById(R.id.btnlogin);
         mcheck = (CheckBox)findViewById(R.id.chkrememberme);
+
+        loadIMEI();
 
         Currmont();
         buttonlogin.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +110,85 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         isInternetOn();
 
         getPreferencedata();
+    }
+
+
+    public void loadIMEI() {
+        // Check if the READ_PHONE_STATE permission is already available.
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // READ_PHONE_STATE permission has not been granted.
+            requestReadPhoneStatePermission();
+        } else {
+            // READ_PHONE_STATE permission is already been granted.
+            doPermissionGrantedStuffs();
+        }
+    }
+
+    private void requestReadPhoneStatePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_PHONE_STATE)) {
+            // Provide an additional rationale to the user if the permission was not granted
+            // and the user would benefit from additional context for the use of the permission.
+            // For example if the user has previously denied the permission.
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission Request")
+//                    .setMessage(getString(R.string.permission_read_phone_state_rationale))
+                    .setCancelable(false)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //re-request
+                            ActivityCompat.requestPermissions(LoginActivity.this,
+                                    new String[]{Manifest.permission.READ_PHONE_STATE},
+                                    MY_PERMISSIONS_REQUEST_READ_PHONE_STATE);
+                        }
+                    })
+//                    .setIcon(R.drawable.onlinlinew_warning_sign)
+                    .show();
+        } else {
+            // READ_PHONE_STATE permission has not been granted yet. Request it directly.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
+                    MY_PERMISSIONS_REQUEST_READ_PHONE_STATE);
+        }
+    }
+
+    /**
+     * Callback received when a permissions request has been completed.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_READ_PHONE_STATE) {
+            // Received permission result for READ_PHONE_STATE permission.est.");
+            // Check if the only required permission has been granted
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // READ_PHONE_STATE permission has been granted, proceed with displaying IMEI Number
+                //alertAlert(getString(R.string.permision_available_read_phone_state));
+                doPermissionGrantedStuffs();
+            } else {
+//                alertAlert(getString(R.string.permissions_not_granted_read_phone_state));
+            }
+        }
+    }
+
+
+    public void doPermissionGrantedStuffs() {
+        //Have an  object of TelephonyManager
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        imeino = tm.getDeviceId();
+
     }
 
     public void isInternetOn() {
@@ -159,6 +248,8 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             case R.id.listdate:
                 Intent intent = new Intent(LoginActivity.this,DateListActivity.class);
                 intent.putExtra("a1",user);
+                intent.putExtra("a2",operatorno);
+                intent.putExtra("a3",pathIp);
                 startActivity(intent);
 
                 return true;
@@ -201,6 +292,11 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             String p = sp.getString("pref_pass","not found");
             editTextpass.setText(p.toString());
         }
+        if (sp.contains("pref_operatorno"))
+        {
+            String o = sp.getString("pref_operatorno","not found");
+            editTextoperatorno.setText(o.toString());
+        }
         if (sp.contains("pref_check"))
         {
             Boolean c = sp.getBoolean("pref_check",false);
@@ -212,9 +308,66 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     {
         user = editTextuser.getText().toString().toUpperCase();
         pass = editTextpass.getText().toString();
-        spincomp = spinner.getSelectedItem().toString();
+        operatorno = editTextoperatorno.getText().toString();
+
+        new getOperaterNoData().execute();
 
         new getloginData().execute();
+    }
+
+    public class GetUpdateData extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            shh = new ServiceHandler();
+
+            String url = pathIp + "Registration/Imeinoupdate";
+
+            Log.d("Url: ", "> " + url);
+
+            try {
+                // Making a request to url and getting response
+
+                List<NameValuePair> para = new ArrayList<>();
+                // para.add(new BasicNameValuePair("CustBal", balance));
+//                para.add(new BasicNameValuePair("CustName", custname));
+                para.add(new BasicNameValuePair("AgentName", user));
+                para.add(new BasicNameValuePair("OperatorCode", operatorno));
+                para.add(new BasicNameValuePair("IMEINo", imeino));
+
+
+                String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST, para);
+                if (jsonStr != null) {
+                    JSONObject jObj = new JSONObject(jsonStr);
+                    String msg = jObj.getString("Message");
+                    Status = Integer.parseInt(jObj.getString("Status"));
+
+
+                } else {
+                    Toast.makeText(LoginActivity.this, "Data not Found", Toast.LENGTH_LONG).show();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e("ServiceHandler", "Json Error ");
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            super.onPostExecute(result);
+        }
     }
 
     @Override
@@ -243,73 +396,99 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     }
 
 
-
-    class getloginData extends AsyncTask<Void, Void, String>
+    class getOperaterNoData extends AsyncTask<Void, Void, String>
     {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progress=new ProgressDialog(LoginActivity.this);
-            progress.setMessage("Loading...");
-            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progress.setIndeterminate(true);
-            progress.setProgress(0);
-            progress.show();
         }
 
         @Override
         protected String doInBackground(Void... params) {
             shh = new ServiceHandler();
-            String url = path + "Registration/AgentLogin";
+            String url = path + "RegistrationApi/getAgentIpLink";
             Log.d("Url: ", "> " + url);
 
             try{
                 List<NameValuePair> params2 = new ArrayList<>();
-                params2.add(new BasicNameValuePair("AgentName",user));
-                params2.add(new BasicNameValuePair("Password",pass));
-//                params2.add(new BasicNameValuePair("CompanyId",spincomp));
+                params2.add(new BasicNameValuePair("OperatorCode",operatorno));
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST , params2);
 
                 if (jsonStr != null) {
                     JSONObject c1 = new JSONObject(jsonStr);
                     JSONArray classArray = c1.getJSONArray("Response");
-                    //JSONArray jsonarry = new JSONArray(jsonStr);
-                    Response = (c1.getString("Response"));
-                    if (Response != null)
-                    {
-                        for (int i = 0; i < classArray.length(); i++) {
-                            JSONObject a1 = classArray.getJSONObject(i);
-                            user1 = a1.getString("AgentName");
-                            pass1 = a1.getString("Password");
-                        }
-                        if(classArray.length() == 0)
-                        {
-                            flag = 0;
-                        }
-                        else
-                        {
-                            flag = 1;
-                            if (mcheck.isChecked())
-                            {
-                                Boolean boolIscheck = mcheck.isChecked();
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("pref_name",editTextuser.getText().toString());
-                                editor.putString("pref_pass",editTextpass.getText().toString());
-                                editor.putBoolean("pref_check",boolIscheck);
-                                editor.apply();
-                            }
-                            else
-                            {
-                                preferences.edit().clear().apply();
-                            }
-                        }
+                    for (int i = 0; i < classArray.length(); i++) {
+                        JSONObject a1 = classArray.getJSONObject(i);
+                        operatorno = a1.getString("OperatorCode");
+                        pathIp = a1.getString("ApiLink");
+                        updateimeino = a1.getString("IMEINo");
                     }
 
-                    else
-                    {
-                        Toast.makeText(getBaseContext(), "Invalid AgentName Or Password", Toast.LENGTH_LONG).show();
-                    }
+                }
+                else
+                {
+                    //Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+                }
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if(updateimeino == "")
+            {
+                new GetUpdateData().execute();
+            }
+            else
+            {
+//                Toast.makeText(getBaseContext(), "You not a Authorized Agent", Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+
+    }
+
+
+    class getloginData extends AsyncTask<Void, Void, String>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress = new ProgressDialog(LoginActivity.this);
+            progress.getWindow().setBackgroundDrawable(new
+                    ColorDrawable(android.graphics.Color.TRANSPARENT));
+            progress.setIndeterminate(true);
+            progress.setCancelable(false);
+            progress.show();
+            progress.setContentView(R.layout.progress_dialog);
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            shh = new ServiceHandler();
+            String url = pathIp + "Registration/AgentLogin";
+            Log.d("Url: ", "> " + url);
+
+            try{
+                List<NameValuePair> params2 = new ArrayList<>();
+                params2.add(new BasicNameValuePair("AgentName",user));
+                params2.add(new BasicNameValuePair("Password",pass));
+                params2.add(new BasicNameValuePair("OperatorCode",operatorno));
+                params2.add(new BasicNameValuePair("IMEINo", imeino));
+
+                String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST , params2);
+
+                if (jsonStr != null) {
+                    JSONObject jObj = new JSONObject(jsonStr);
+                    Status = Integer.parseInt(jObj.getString("Status"));
 
 
                 }
@@ -331,19 +510,44 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
 
             progress.dismiss();
 
-            if (flag == 1)
+            if (Status == 1)
             {
+
+                if (mcheck.isChecked())
+                {
+                    Boolean boolIscheck = mcheck.isChecked();
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("pref_name",editTextuser.getText().toString());
+                    editor.putString("pref_pass",editTextpass.getText().toString());
+                    editor.putString("pref_operatorno",editTextoperatorno.getText().toString());
+                    editor.putBoolean("pref_check",boolIscheck);
+                    editor.apply();
+                }
+                else
+                {
+                    preferences.edit().clear().apply();
+                }
+
                 Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 intent.putExtra("a1",user);
                 intent.putExtra("a2",cmonth);
                 intent.putExtra("a3",cyear);
-                intent.putExtra("a4",spincomp);
+                intent.putExtra("a4",operatorno);
+                intent.putExtra("a5",pathIp);
                 startActivity(intent);
                 //finish();
             }
             else {
-                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                if (updateimeino == imeino)
+                {
+                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "You Are Not Authorized User", Toast.LENGTH_LONG).show();
+                }
+
             }
         }
     }

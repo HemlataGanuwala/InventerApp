@@ -1,6 +1,8 @@
 package com.example.skyserver.skycableweb;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,11 +32,12 @@ public class MainActivity extends AppCompatActivity {
      List<Product> mPlanetlist = new ArrayList<Product>();
     ListProductAdapter adapter;
     String id,agentnm,cmonth,cyear,custnm,path,spincompany,mob,setupbox,billno,dtfrom,payableamt,dtto,paid,bal,paydt,adcust,paydt1,paidamt1,area,paystatus,montch,sbillno;
-
+    String operatorno,pathIp;
     ServiceHandler shh;
     ListView listView;
     int success = 1;
     EditText editTextsearch;
+    ProgressDialog progress;
 
 
     @Override
@@ -92,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(MainActivity.this,AgentPayActivity.class);
                 intent.putExtra("a4",sbillno);
+                intent.putExtra("a5",operatorno);
+                intent.putExtra("a6",pathIp);
                 startActivity(intent);
 
             }
@@ -109,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
             agentnm = (String) bg1.get("a1");
             cmonth = (String) bg1.get("a2");
             cyear = (String) bg1.get("a3");
-            spincompany = (String) bg1.get("a4");
+            operatorno = (String) bg1.get("a4");
+            pathIp = (String) bg1.get("a5");
         }
         mPlanetlist.clear();
         new getCustlistData().execute();
@@ -120,12 +126,19 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progress = new ProgressDialog(MainActivity.this);
+            progress.getWindow().setBackgroundDrawable(new
+                    ColorDrawable(android.graphics.Color.TRANSPARENT));
+            progress.setIndeterminate(true);
+            progress.setCancelable(false);
+            progress.show();
+            progress.setContentView(R.layout.progress_dialog);
         }
 
         @Override
         protected String doInBackground(Void... params) {
             shh = new ServiceHandler();
-            String url = path + "Registration/BillDetailsList";
+            String url = pathIp + "Registration/BillDetailsList";
             Log.d("Url: ", "> " + url);
 
             try{
@@ -133,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 params2.add(new BasicNameValuePair("AgentName",agentnm));
                 params2.add(new BasicNameValuePair("Bmonth",cmonth));
                 params2.add(new BasicNameValuePair("Byear",cyear));
-//                params2.add(new BasicNameValuePair("CompanyId",spincompany));
+                params2.add(new BasicNameValuePair("OperatorCode",operatorno));
 
                 String jsonStr = shh.makeServiceCall(url, ServiceHandler.POST , params2);
 
@@ -181,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            progress.dismiss();
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
